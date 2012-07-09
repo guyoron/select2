@@ -102,6 +102,33 @@ version: 2.1
     });
 </script>
 
+<script id="script_e6_1">
+    $(document).ready(function() {
+        $("#e6_1").select2({
+            placeholder: {title: "Search for a movie", id: ""},
+            minimumInputLength: 1,
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+                multiple: true,
+                dataType: 'jsonp',
+                data: function (term, page) {
+                    return {
+                        q: term, // search term
+                        page_limit: 10,
+                        apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                    };
+                },
+                results: function (data, page) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter remote JSON data
+                    return {results: data.movies};
+                }
+            },
+            formatResult: movieFormatResult, // omitted for brevity, see the source of this page
+            formatSelection: movieFormatSelection  // omitted for brevity, see the source of this page
+        });
+    });
+</script>
+
 <script id="script_e7">
     $(document).ready(function() {
         $("#e7").select2({
@@ -385,17 +412,28 @@ version: 2.1
 
 <article class="zebra row" id="ajax">
     <div class="span12">
-        <h3>Loading Remote Data</h3>
-        <p>Select2 comes with AJAX/JSONP support built in. In this example we will search for a movie using Rotten Tomatoes API:</p>
         <p>
             <input type="hidden" class="bigdrop" id="e6" style="width:600px"/>
         </p>
-        <p class="alert alert-warning">If this example does not work it is probably because the Rotten Tomatoes API key usage of 10000 requests per day has been exhausted. Please try again tomorrow.</p>
         <h3>Example Code</h3>
         <pre class="prettyprint linenums" id="code_e6"></pre>
+    </div>
+</article>
+
+<article class="zebra row" id="ajax_multiple">
+    <div class="span12">
+        <h3>Loading Remote Data</h3>
+        <p>Select2 comes with AJAX/JSONP support built in. In this example we will search for a movie using Rotten Tomatoes API:</p>
+        <p>
+            <input type="hidden" class="bigdrop" id="e6_1" style="width:600px"/>
+        </p>
+        <p class="alert alert-warning">If this example does not work it is probably because the Rotten Tomatoes API key usage of 10000 requests per day has been exhausted. Please try again tomorrow.</p>
+        <h3>Example Code</h3>
+        <pre class="prettyprint linenums" id="code_e6_1"></pre>
         <p>Select2 uses jQuery's <code>$.ajax</code> function to execute the remote call by default. An alternative <code>transport</code> function can be specified in the ajax settings, or an entirely custom implementation can be built by providing a custom <code>query</code> function instead of using the <code>ajax</code> helper</p>
     </div>
 </article>
+
 <article class="row" id="infinite">
     <div class="span12">
         <h3>Infinite Scroll with Remote Data</h3>

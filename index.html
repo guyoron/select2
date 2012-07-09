@@ -105,21 +105,25 @@ version: 2.1
 <script id="script_e6_1">
     $(document).ready(function() {
         $("#e6_1").select2({
-            placeholder: "Search for a movie",
+            placeholder: "Search for a module",
             multiple: true,
             width: '300px',
-            minimumInputLength: 2,
+            minimumInputLength: 1,
             ajax: {
                 url: "http://modulepuppy.heroku.com/search.json",
                 multiple: true,
                 width: '300px',
                 dataType: 'jsonp',
                 data: function (term, page) {
+                  console.log('term');
+                  console.log(term);
                     return {
                         query: term, // search term
                       }
                 },
                 results: function (data, page) { // parse the results into the format expected by Select2.
+                  console.log('data');
+                  console.log(data);
                     var array = [];
                     for (result in data) {
                       array.push({id: result.project.short_name, text: result.project.title});

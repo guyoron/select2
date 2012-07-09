@@ -105,28 +105,27 @@ version: 2.1
 <script id="script_e6_1">
     $(document).ready(function() {
         $("#e6_1").select2({
-            placeholder: {title: "Search for a movie", id: ""},
+            placeholder: "Search for a movie",
             multiple: true,
-            minimumInputLength: 1,
-            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+            width: '300px',
+            minimumInputLength: 2,
+            ajax: {
+                url: "http://modulepuppy.heroku.com/search.json",
                 multiple: true,
                 width: '300px',
                 dataType: 'jsonp',
                 data: function (term, page) {
                     return {
-                        q: term, // search term
-                        page_limit: 10,
-                        apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
-                    };
+                        query: term, // search term
                 },
                 results: function (data, page) { // parse the results into the format expected by Select2.
-                    // since we are using custom formatting functions we do not need to alter remote JSON data
-                    return {results: data.movies};
+                    var array = [];
+                    for (result in data) {
+                      array.push({id: result.project.short_name, text: result.project.title});
+                    }
+                    return {results: array};
                 }
             },
-            formatResult: movieFormatResult, // omitted for brevity, see the source of this page
-            formatSelection: movieFormatSelection  // omitted for brevity, see the source of this page
         });
     });
 </script>

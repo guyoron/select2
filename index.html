@@ -110,6 +110,7 @@ version: 2.1
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
                 multiple: true,
+                width: '300px',
                 dataType: 'jsonp',
                 data: function (term, page) {
                     return {
@@ -412,25 +413,26 @@ version: 2.1
 
 <article class="zebra row" id="ajax">
     <div class="span12">
-        <p>
-            <input type="hidden" class="bigdrop" id="e6" style="width:600px"/>
-        </p>
-        <h3>Example Code</h3>
-        <pre class="prettyprint linenums" id="code_e6"></pre>
-    </div>
-</article>
-
-<article class="zebra row" id="ajax_multiple">
-    <div class="span12">
         <h3>Loading Remote Data</h3>
         <p>Select2 comes with AJAX/JSONP support built in. In this example we will search for a movie using Rotten Tomatoes API:</p>
         <p>
-            <input type="hidden" class="bigdrop" id="e6_1" style="width:600px"/>
+            <input type="hidden" class="bigdrop" id="e6" style="width:600px"/>
         </p>
         <p class="alert alert-warning">If this example does not work it is probably because the Rotten Tomatoes API key usage of 10000 requests per day has been exhausted. Please try again tomorrow.</p>
         <h3>Example Code</h3>
-        <pre class="prettyprint linenums" id="code_e6_1"></pre>
+        <pre class="prettyprint linenums" id="code_e6"></pre>
         <p>Select2 uses jQuery's <code>$.ajax</code> function to execute the remote call by default. An alternative <code>transport</code> function can be specified in the ajax settings, or an entirely custom implementation can be built by providing a custom <code>query</code> function instead of using the <code>ajax</code> helper</p>
+    </div>
+</article>
+
+<article class="zebra row" id="ajax-multiple">
+    <div class="span12">
+        <h3>Loading Remote Data - Multiple</h3>
+        <p>
+            <input type="hidden" id="e6_1" />
+        </p>
+        <h3>Example Code</h3>
+        <pre class="prettyprint linenums" id="code_e6_1"></pre>
     </div>
 </article>
 

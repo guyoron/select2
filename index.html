@@ -106,6 +106,7 @@ version: 2.1
     $(document).ready(function() {
         $("#e6_1").select2({
             placeholder: {title: "Search for a movie", id: ""},
+            multiple: true,
             minimumInputLength: 1,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
